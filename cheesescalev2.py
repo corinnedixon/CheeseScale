@@ -1,5 +1,4 @@
 import serial
-import Serial
 import time
 import json
 import RPi.GPIO as GPIO
@@ -42,8 +41,8 @@ pizzaData = {
 mode = 0
 
 #LED matrix setup
-serial = spi(port=0, device=0, gpio=noop())
-device = max7219(serial)
+sr = spi(port=0, device=0, gpio=noop())
+device = max7219(sr)
   
 #Class for pretop pizza, holds cheese and pepperoni weights in pounds
 class PretopPizza:
