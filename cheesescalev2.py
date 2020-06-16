@@ -107,8 +107,6 @@ def buttonPressed(pizzaSize):
   pizzaData["Time of Day"] = time.localtime().asctime()
   pizzaData["Total Time"] = time.time()
 
-ser.write(b'TK\n')
-
 #Mutable double class for keeping track of weight
 class MutableDouble(float):
     def __init__(self, val = 0):
