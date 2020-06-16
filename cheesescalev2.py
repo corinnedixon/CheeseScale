@@ -99,7 +99,7 @@ def appendToJson(obj, fileName):
 def buttonPressed(pizzaSize):
   if pizzaData["Weight"] !=0:
     pizzaData["Total Time"] = time.time() - pizzaData["Total Time"]
-    appendToJson(pizzaData, "CheeseScale/pizzadata.json") 
+    #appendToJson(pizzaData, "CheeseScale/pizzadata.json") 
   
   tare()
   pizzaData["Weight"] = 0
