@@ -68,15 +68,12 @@ def updateLightBar(currentWeight, toppingWeight):
   if bars < 32:
     with canvas(device) as draw:
       draw.rectangle((0, 0, bars, 8), outline="white", fill="white")
-    time.sleep(2)
   else:
-    for i in range(5):
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="white", fill="white")
-      time.sleep(0.2)
+      time.sleep(0.1)
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
-      time.sleep(0.2)
       
 
 #Function for numeric display
@@ -84,7 +81,6 @@ def updateNumbers(lbs):
   msg = str(lbs)
   with canvas(device) as draw:
     text(draw, (0, 0), msg, fill="white", font=proportional(LCD_FONT))
-  time.sleep(2)
 
 #Function for adding to JSON file
 def appendToJson(obj, fileName):
@@ -103,7 +99,7 @@ def appendToJson(obj, fileName):
 def buttonPressed(pizzaSize):
   if pizzaData["Weight"] !=0:
     pizzaData["Total Time"] = time.time() - pizzaData["Total Time"]
-    appendToJson(pizzaData, "pizzadata.json") 
+    appendToJson(pizzaData, "CheeseScale/pizzadata.json") 
   
   tare()
   pizzaData["Weight"] = 0
