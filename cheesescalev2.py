@@ -1,4 +1,5 @@
 import serial
+import Serial
 import time
 import json
 import RPi.GPIO as GPIO
