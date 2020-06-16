@@ -7,7 +7,7 @@ from luma.core.render import canvas
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 from luma.led_matrix.device import max7219
-from Tkinter import *
+from tkinter import *
 
 #Board set up
 GPIO.setmode(GPIO.BOARD)
