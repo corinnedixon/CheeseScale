@@ -109,7 +109,7 @@ def buttonPressed(pizzaSize):
   pizzaData["Total Time"] = time.time()
 
 #Scale functions from saucer.py
-root = tk.Tk()
+root = Tk()
 ser = serial.Serial()
 ser.port = "/dev/ttyUSB0"
 ser.baudrate = 9600
