@@ -41,9 +41,6 @@ pizzaData = {
     "Total Time" : 0
   } 
 
-#MODES: 0 - regular, 1 - cheese, 2 - pepperoni
-mode = 0
-
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
 device = max7219(sr, cascaded=4, block_orientation=-90)
@@ -104,7 +101,7 @@ def buttonPressed(pizzaSize):
   tare()
   pizzaData["Weight"] = 0
   pizzaData["Size"] = pizzaSize
-  pizzaData["Time of Day"] = time.localtime().asctime()
+  pizzaData["Time of Day"] = time.asctime(time.localtime())
   pizzaData["Total Time"] = time.time()
 
 #Mutable double class for keeping track of weight
@@ -182,4 +179,3 @@ while True:
     buttonPressed(12)
   elif GPIO.input(button14) == GPIO.HIGH:
     buttonPressed(14)
-  time.sleep(0.01)
