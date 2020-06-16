@@ -65,12 +65,15 @@ def updateLightBar(currentWeight, toppingWeight):
   if bars < 32:
     with canvas(device) as draw:
       draw.rectangle((0, 0, bars, 8), outline="white", fill="white")
+      time.sleep(.00001)
   else:
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="white", fill="white")
+        time.sleep(.00001)
       time.sleep(0.1)
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
+        time.sleep(.00001)
       
 
 #Function for numeric display
@@ -78,6 +81,7 @@ def updateNumbers(lbs):
   msg = str(lbs)
   with canvas(device) as draw:
     text(draw, (0, 0), msg, fill="white", font=proportional(LCD_FONT))
+    time.sleep(.00001)
 
 #Function for adding to JSON file
 def appendToJson(obj, fileName):
@@ -98,6 +102,7 @@ def buttonPressed(pizzaSize):
     pizzaData["Total Time"] = time.time() - pizzaData["Total Time"]
     #appendToJson(pizzaData, "CheeseScale/pizzadata.json") 
   
+  time.sleep(.00001)
   tare()
   pizzaData["Weight"] = 0
   pizzaData["Size"] = pizzaSize
@@ -160,6 +165,7 @@ def tare():
 while True:
   #Update weight from scale
   readWeight()
+  time.sleep(.01)
   pizzaData["Weight"] = scaleWeight.get()
   
   #Update display corresponding to mode
@@ -179,5 +185,3 @@ while True:
     buttonPressed(12)
   elif GPIO.input(button14) == GPIO.HIGH:
     buttonPressed(14)
-  
-  time.sleep(0.04)
