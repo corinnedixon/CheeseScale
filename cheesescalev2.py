@@ -77,7 +77,7 @@ def updateLightBar(currentWeight, toppingWeight):
 
 #Function for numeric display
 def updateNumbers(lbs):
-  msg = lbs + " LB"
+  msg = str(lbs)
   with canvas(device) as draw:
     text(draw, (0, 0), msg, fill="white", font=proportional(LCD_FONT))
   time.sleep(2)
