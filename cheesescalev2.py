@@ -180,4 +180,4 @@ while True:
   elif GPIO.input(button14) == GPIO.HIGH:
     buttonPressed(14)
   
-  time.sleep(0.01)
+  time.sleep(0.04)
