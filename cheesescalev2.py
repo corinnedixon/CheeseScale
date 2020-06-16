@@ -46,7 +46,7 @@ mode = 0
 
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
-device = max7219(sr)
+device = max7219(sr, cascaded=4, block_orientation=-90)
   
 #Class for pretop pizza, holds cheese and pepperoni weights in pounds
 class PretopPizza:
