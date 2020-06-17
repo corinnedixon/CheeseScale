@@ -11,6 +11,10 @@ from luma.core.render import canvas
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 from luma.led_matrix.device import max7219
+from firebase import firebase
+
+#Firebase set up
+firebase = firebase.FirebaseApplication('https://cheesescale.firebaseio.com/', None)
 
 #Board set up
 GPIO.setmode(GPIO.BOARD)
@@ -30,8 +34,6 @@ GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 #Set up 3 position switch at IO pins
 GPIO.setup(13,GPIO.IN)
 GPIO.setup(15,GPIO.IN)
-
-#[firebase instead of json?]
 
 #Dictionary of variables for data collection
 pizzaData = { 
@@ -83,24 +85,11 @@ def updateNumbers(lbs):
     text(draw, (0, 0), msg, fill="white", font=proportional(LCD_FONT))
     time.sleep(.00001)
 
-#Function for adding to JSON file
-def appendToJson(obj, fileName):
-  try:
-    data = json.load(open(fileName, "r"))
-
-    obj.update(data)
-
-    with open(fileName, "a+") as file:
-      json.dump(data, file)
-  except:
-    with open(fileName, "a+") as file:
-      json.dump(obj, file)
-
 #Function for button press
 def buttonPressed(pizzaSize):
   if pizzaData["Weight"] !=0:
     pizzaData["Total Time"] = time.time() - pizzaData["Total Time"]
-    #appendToJson(pizzaData, "CheeseScale/pizzadata.json") 
+    firebase.post('/data', pizzaData)
   
   time.sleep(.00001)
   tare()
