@@ -133,10 +133,10 @@ def readWeight():
             if ser.in_waiting >= 9:
                 b = ser.read_all()
                 b2 = b.decode("utf-8")
-                #if b2[b2.find(":") + 1] == "-":
-                    #fac = -1
-                #else:
-                    #fac = 1
+                if b2[b2.find(":") + 1] == "-":
+                    fac = -1
+                else:
+                    fac = 1
                 b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
                 
                 try:
