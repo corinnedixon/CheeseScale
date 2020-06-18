@@ -167,9 +167,9 @@ def tare():
 #Tare scale before start
 serial_open()
 tare()
-
+print(GPIO.input(37) == GPIO.HIGH)
 #mainloop
-while GPIO.input(37) == GPIO.HIGH:
+while True:
   #Update weight from scale
   readWeight()
   time.sleep(.01)
