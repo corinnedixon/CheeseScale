@@ -141,7 +141,7 @@ def readWeight():
                 b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
                 
                 try:
-                    x = round(float(b3) * fac / 2,2)
+                    x = round(float(b3) * fac * 2.20462,2)
                     scaleWeight.set(x)
                 except ValueError:
                     pass
@@ -151,6 +151,7 @@ def readWeight():
             serial_open()
     else:
         serial_open()
+    time.sleep(.00001)
 
 #Opens the serial port and starts recieving data from scale
 def serial_open():
