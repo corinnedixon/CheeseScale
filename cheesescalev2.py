@@ -142,7 +142,7 @@ def readWeight():
                 
                 try:
                     x = round(float(b3) * fac * 2.20462,2)
-                    scaleWeight.set(x*0.220462)
+                    scaleWeight.set(x)
                 except ValueError:
                     pass
             else:
