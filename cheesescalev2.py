@@ -15,7 +15,8 @@ import pyfireconnect
 
 #pyfire set up
 config = {
-  "databaseURL": "https://cheesescale.firebaseio.com/",
+  "apiKey" : "AIzaSyC8vr6WeOD1UvnT7esvW-aHtwFOx9YVSMA",
+  "databaseURL": "https://cheesescale.firebaseio.com/"
 }
 
 firebase = pyfireconnect.initialize(config)
