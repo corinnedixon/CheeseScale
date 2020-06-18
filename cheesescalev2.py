@@ -51,7 +51,7 @@ GPIO.setup(37,GPIO.IN)
 
 #Dictionary of variables for data collection
 pizzaData = { 
-    "Weight (lbs)" : 0, 
+    "Weight (lbs)" : -513, 
     "Time of Day" : time.asctime(time.localtime()), 
     "Size" : 14, 
     "Total Time (s)" : time.time()
@@ -167,13 +167,14 @@ def tare():
 #Tare scale before start
 serial_open()
 tare()
-print(GPIO.input(37) == GPIO.HIGH)
+
 #mainloop
 while True:
   #Update weight from scale
   readWeight()
   time.sleep(.01)
-  if(scaleWeight.get() > pizzaData["Weight (lbs)"]):
+  #check for weight to be -513 so that random data is not recorded at start
+  if(scaleWeight.get() > pizzaData["Weight (lbs)"] and pizzaData["Weight (lbs)"] != -513):
     pizzaData["Weight (lbs)"] = scaleWeight.get()
   
   #Update display corresponding to mode
