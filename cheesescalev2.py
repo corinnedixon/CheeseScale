@@ -157,6 +157,9 @@ def serial_open():
 #Tares the scale to zero when you press the button
 def tare():
     ser.write(b'TK\n')
+    
+#Tare scale before start
+tare()
 
 #mainloop
 while True:
