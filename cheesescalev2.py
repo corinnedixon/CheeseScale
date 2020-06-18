@@ -47,6 +47,7 @@ GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 #Set up 3 position switch at IO pins
 GPIO.setup(13,GPIO.IN)
 GPIO.setup(15,GPIO.IN)
+GPIO.setup(37,GPIO.IN)
 
 #Dictionary of variables for data collection
 pizzaData = { 
