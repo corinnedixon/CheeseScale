@@ -101,7 +101,7 @@ def updateNumbers(lbs):
 
 #Function for button press
 def buttonPressed(pizzaSize):
-  if pizzaData["Weight (lbs)"] !=0:
+  if pizzaData["Weight (lbs)"] > 0:
     pizzaData["Total Time (s)"] = time.time() - pizzaData["Total Time (s)"]
     db.push(pizzaData)
   
