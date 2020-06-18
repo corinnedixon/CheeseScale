@@ -77,7 +77,7 @@ Pizzas = {
 
 #Function for light bar display
 def updateLightBar(currentWeight, toppingWeight):
-  bars = int(toppingWeight/32*currentWeight)
+  bars = int(currentWeight/toppingWeight*32)
   if bars < 32:
     with canvas(device) as draw:
       draw.rectangle((0, 0, bars, 8), outline="white", fill="white")
@@ -169,7 +169,7 @@ serial_open()
 tare()
 print(GPIO.input(37) == GPIO.HIGH)
 #mainloop
-while True:
+while GPIO.input(37) == GPIO.HIGH:
   #Update weight from scale
   readWeight()
   time.sleep(.01)
