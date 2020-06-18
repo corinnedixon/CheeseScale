@@ -172,7 +172,10 @@ while True:
   #Update weight from scale
   readWeight()
   time.sleep(.01)
-  pizzaData["Weight (lbs)"] = scaleWeight.get()
+  
+  #Update weight if weight was added
+  if scaleWeight.get() > pizzaData["Weight (lbs)"]:
+    pizzaData["Weight (lbs)"] = scaleWeight.get()
   
   #Update display corresponding to mode
   if GPIO.input(13) == GPIO.HIGH:
