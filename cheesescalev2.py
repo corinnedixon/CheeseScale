@@ -139,7 +139,7 @@ def readWeight():
                 else:
                     fac = 1
                 b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
-                
+                print(b3)
                 try:
                     x = round(float(b3) * fac * 2.20462,2)
                     scaleWeight.set(x)
