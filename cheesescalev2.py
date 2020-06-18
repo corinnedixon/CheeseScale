@@ -45,10 +45,10 @@ GPIO.setup(15,GPIO.IN)
 
 #Dictionary of variables for data collection
 pizzaData = { 
-    "Weight" : 0, 
+    "Weight (lbs)" : 0, 
     "Time of Day" : time.asctime(time.localtime()), 
     "Size" : 14, 
-    "Total Time" : time.time()
+    "Total Time (s)" : time.time()
   } 
 
 #LED matrix setup
@@ -95,16 +95,16 @@ def updateNumbers(lbs):
 
 #Function for button press
 def buttonPressed(pizzaSize):
-  if pizzaData["Weight"] !=0:
-    pizzaData["Total Time"] = time.time() - pizzaData["Total Time"]
+  if pizzaData["Weight (lbs)"] !=0:
+    pizzaData["Total Time (s)"] = time.time() - pizzaData["Total Time (s)"]
     db.push(pizzaData)
   
   time.sleep(.00001)
   tare()
-  pizzaData["Weight"] = 0
+  pizzaData["Weight (lbs)"] = 0
   pizzaData["Size"] = pizzaSize
   pizzaData["Time of Day"] = time.asctime(time.localtime())
-  pizzaData["Total Time"] = time.time()
+  pizzaData["Total Time (s)"] = time.time()
 
 #Mutable double class for keeping track of weight
 class MutableDouble(float):
@@ -136,7 +136,7 @@ def readWeight():
                 
                 try:
                     x = round(float(b3) * fac * 2.20462,2)
-                    scaleWeight.set(x)
+                    scaleWeight.set(x*0.220462)
                 except ValueError:
                     pass
             else:
@@ -163,15 +163,15 @@ while True:
   #Update weight from scale
   readWeight()
   time.sleep(.01)
-  pizzaData["Weight"] = scaleWeight.get()
+  pizzaData["Weight (lbs)"] = scaleWeight.get()
   
   #Update display corresponding to mode
   if GPIO.input(13) == GPIO.HIGH:
-    updateLightBar(pizzaData["Weight"], Pizzas[str(pizzaData["Size"])].cheeseWeight)
+    updateLightBar(pizzaData["Weight (lbs)"], Pizzas[str(pizzaData["Size"])].cheeseWeight)
   elif GPIO.input(15) == GPIO.HIGH:
-    updateLightBar(pizzaData["Weight"], Pizzas[str(pizzaData["Size"])].pepWeight)
+    updateLightBar(pizzaData["Weight (lbs)"], Pizzas[str(pizzaData["Size"])].pepWeight)
   else:
-    updateNumbers(pizzaData["Weight"])
+    updateNumbers(pizzaData["Weight (lbs)"])
     
   #Button check for size
   if GPIO.input(button7) == GPIO.HIGH:
