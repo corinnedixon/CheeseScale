@@ -18,8 +18,7 @@ config = {
   "apiKey" : "AIzaSyC8vr6WeOD1UvnT7esvW-aHtwFOx9YVSMA",
   "authDomain" : "cheesescale.firebaseapp.com",
   "databaseURL" : "https://cheesescale.firebaseio.com/",
-  "storageBucket" : "cheesescale.appspot.com",
-  "serviceAccount" : "data/pizzaData.json"
+  "storageBucket" : "cheesescale.appspot.com"
 }
 
 firebase = pyfireconnect.initialize(config)
