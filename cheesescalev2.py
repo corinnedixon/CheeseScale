@@ -4,6 +4,7 @@ import threading
 import multiprocessing
 import datetime
 import time
+import os
 import json
 import RPi.GPIO as GPIO
 from luma.core.interface.serial import spi, noop
@@ -12,6 +13,10 @@ from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 from luma.led_matrix.device import max7219
 import pyfireconnect
+
+#Set timezone
+os.environ['TZ'] = 'US/Eastern'
+time.tzset()
 
 #pyfire set up
 config = {
@@ -128,10 +133,10 @@ def readWeight():
             if ser.in_waiting >= 9:
                 b = ser.read_all()
                 b2 = b.decode("utf-8")
-                if b2[b2.find(":") + 1] == "-":
-                    fac = -1
-                else:
-                    fac = 1
+                #if b2[b2.find(":") + 1] == "-":
+                    #fac = -1
+                #else:
+                    #fac = 1
                 b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
                 
                 try:
