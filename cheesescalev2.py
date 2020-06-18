@@ -11,10 +11,15 @@ from luma.core.render import canvas
 from luma.core.legacy import text
 from luma.core.legacy.font import proportional, LCD_FONT
 from luma.led_matrix.device import max7219
-from firebase import firebase
+import pyfireconnect
 
-#Firebase set up
-firebase = firebase.FirebaseApplication('https://cheesescale.firebaseio.com/', None)
+#pyfire set up
+config = {
+  "databaseURL": "https://cheesescale.firebaseio.com/",
+}
+
+firebase = pyfireconnect.initialize(config)
+db = firebase.database()
 
 #Board set up
 GPIO.setmode(GPIO.BOARD)
@@ -89,7 +94,7 @@ def updateNumbers(lbs):
 def buttonPressed(pizzaSize):
   if pizzaData["Weight"] !=0:
     pizzaData["Total Time"] = time.time() - pizzaData["Total Time"]
-    firebase.post('/data', pizzaData)
+    db.update(pizzaData)
   
   time.sleep(.00001)
   tare()
