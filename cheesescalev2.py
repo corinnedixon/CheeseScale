@@ -44,7 +44,7 @@ GPIO.setup(button10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-#Set up 3 position switch at IO pins
+#Set up 3 position switch at IO pins and on off switch
 GPIO.setup(13,GPIO.IN)
 GPIO.setup(15,GPIO.IN)
 GPIO.setup(37,GPIO.IN)
@@ -169,19 +169,20 @@ serial_open()
 tare()
 print(GPIO.input(37) == GPIO.HIGH)
 #mainloop
-while GPIO.input(37) == GPIO.HIGH:
+while True:
   #Update weight from scale
   readWeight()
   time.sleep(.01)
-  pizzaData["Weight (lbs)"] = scaleWeight.get()
+  if(scaleWeight.get() > pizzaData["Weight (lbs)"]):
+    pizzaData["Weight (lbs)"] = scaleWeight.get()
   
   #Update display corresponding to mode
   if GPIO.input(13) == GPIO.HIGH:
-    updateLightBar(pizzaData["Weight (lbs)"], Pizzas[str(pizzaData["Size"])].cheeseWeight)
+    updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].cheeseWeight)
   elif GPIO.input(15) == GPIO.HIGH:
-    updateLightBar(pizzaData["Weight (lbs)"], Pizzas[str(pizzaData["Size"])].pepWeight)
+    updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].pepWeight)
   else:
-    updateNumbers(pizzaData["Weight (lbs)"])
+    updateNumbers(scaleWeight.get())
     
   #Button check for size
   if GPIO.input(button7) == GPIO.HIGH:
