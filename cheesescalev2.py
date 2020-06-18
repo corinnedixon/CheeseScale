@@ -148,7 +148,7 @@ def readWeight():
             else:
                 pass
         except serial.serialutil.SerialException:
-            serial_open()]
+            serial_open()
     else:
         serial_open()
 
