@@ -159,6 +159,7 @@ def tare():
     ser.write(b'TK\n')
     
 #Tare scale before start
+serial_open()
 tare()
 
 #mainloop
