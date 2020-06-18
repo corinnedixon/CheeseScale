@@ -46,9 +46,9 @@ GPIO.setup(15,GPIO.IN)
 #Dictionary of variables for data collection
 pizzaData = { 
     "Weight" : 0, 
-    "Time of Day" : time.localtime(), 
+    "Time of Day" : time.asctime(time.localtime()), 
     "Size" : 14, 
-    "Total Time" : 0
+    "Total Time" : time.time()
   } 
 
 #LED matrix setup
