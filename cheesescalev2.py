@@ -143,7 +143,7 @@ def readWeight():
                   b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
 
                   try:
-                      x = round(float(b3) * fac * 2.20462,2)
+                      x = round(float(b3) * fac * 2.20462,3)
                       scaleWeight.set(x)
                   except ValueError:
                       pass
@@ -173,7 +173,6 @@ tare()
 
 #mainloop
 while True:
-  print(GPIO.input(37) == GPIO.HIGH)
   #Update weight from scale
   readWeight()
   time.sleep(.01)
