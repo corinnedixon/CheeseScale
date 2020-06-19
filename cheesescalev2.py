@@ -180,9 +180,12 @@ def tare():
 serial_open()
 tare()
 
-#mainloop
-while True:
-  print(GPIO.input(37) == GPIO.HIGH)
+#wait for switch turn on
+while (GPIO.input(37) == GPIO.LOW):
+  pass
+
+#mainloop run while switch is on
+while (GPIO.input(37) == GPIO.HIGH):
   #Update weight from scale
   readWeight()
   time.sleep(.01)
