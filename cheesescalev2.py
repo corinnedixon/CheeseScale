@@ -210,3 +210,6 @@ while (GPIO.input(37) == GPIO.HIGH):
     buttonPressed(12)
   elif GPIO.input(button14) == GPIO.HIGH:
     buttonPressed(14)
+  
+#Save last pizza before exiting
+buttonPressed(10)
