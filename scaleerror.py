@@ -14,6 +14,15 @@ from luma.core.legacy.font import proportional, LCD_FONT
 from luma.led_matrix.device import max7219
 import pyfireconnect
 
+#Mutable double class for keeping track of weight
+class MutableDouble(float):
+    def __init__(self, val = 0):
+        self.num = val
+    def set(self, val):
+        self.num = val
+    def get(self):
+      return self.num
+      
 #Scale functions from saucer.py
 ser = serial.Serial()
 ser.port = "/dev/ttyUSB0"
