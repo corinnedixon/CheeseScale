@@ -43,16 +43,14 @@ def readWeight():
                     fac = -1
                   else:
                     fac = 1
-                else:
-                  pass
 
-                b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
-                print("b3: " + str(b3) +"\n")
+                  b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
+                  print("b3: " + str(b3) +"\n")
 
-                try:
+                  try:
                     x = round(float(b3) * fac * 2.20462,2)
                     scaleWeight.set(x)
-                except ValueError:
+                  except ValueError:
                     pass
             else:
                 pass
