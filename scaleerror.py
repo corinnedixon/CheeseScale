@@ -38,10 +38,13 @@ def readWeight():
                 print("b: " + str(b))
                 b2 = b.decode("utf-8")
                 print("b2: " + str(b2))
-                if b2[b2.find(":") + 1] == "-":
+                if b2[0] == "W":
+                  if b2[b2.find(":") + 1] == "-":
                     fac = -1
-                else:
+                  else:
                     fac = 1
+                else:
+                  pass
 
                 b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
                 print("b3: " + str(b3) +"\n")
