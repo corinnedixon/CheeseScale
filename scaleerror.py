@@ -35,16 +35,16 @@ def readWeight():
         try:
             if ser.in_waiting >= 9:
                 b = ser.read_all()
-                print("b: " + b)
+                print("b: " + str(b))
                 b2 = b.decode("utf-8")
-                print("b2: " + b2)
+                print("b2: " + str(b2))
                 if b2[b2.find(":") + 1] == "-":
                     fac = -1
                 else:
                     fac = 1
 
                 b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
-                print("b3: " + b3 +"\n")
+                print("b3: " + str(b3) +"\n")
 
                 try:
                     x = round(float(b3) * fac * 2.20462,2)
