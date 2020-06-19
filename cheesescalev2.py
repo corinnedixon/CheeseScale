@@ -182,6 +182,7 @@ tare()
 
 #mainloop
 while True:
+  print(GPIO.input(37) == GPIO.HIGH)
   #Update weight from scale
   readWeight()
   time.sleep(.01)
