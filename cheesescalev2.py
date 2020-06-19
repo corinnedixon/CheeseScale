@@ -212,4 +212,4 @@ while (GPIO.input(37) == GPIO.HIGH):
     buttonPressed(14)
   
 #Save last pizza before exiting
-buttonPressed(10)
+buttonPressed(0)
