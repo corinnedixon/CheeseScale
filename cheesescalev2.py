@@ -85,7 +85,10 @@ def updateLightBar(currentWeight, toppingWeight):
   else:
     if bars >= 36:
       with canvas(device) as draw:
-        text(draw, (0, 0), "EXCESS", fill="white", font=proportional(LCD_FONT))
+        text(draw, (0, 0), "OVER", fill="white", font=proportional(LCD_FONT))
+        time.sleep(.00001
+      with canvas(device) as draw:
+        draw.rectangle(device.bounding_box, outline="black", fill="black")
         time.sleep(.00001)
     else:
       with canvas(device) as draw:
