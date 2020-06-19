@@ -57,7 +57,7 @@ def readWeight():
             serial_open()
     else:
         serial_open()
-    time.sleep(.1)
+    time.sleep(.2)
 
 #Opens the serial port and starts recieving data from scale
 def serial_open():
