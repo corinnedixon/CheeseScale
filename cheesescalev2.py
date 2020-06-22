@@ -114,8 +114,8 @@ def buttonPressed(pizzaSize):
     pizzaData["Total Time (s)"] = time.time() - pizzaData["Total Time (s)"]
     db.push(pizzaData)
   
-  time.sleep(.00001)
   tare()
+  time.sleep(.1)
   pizzaData["Weight (lbs)"] = 0
   pizzaData["Size"] = pizzaSize
   pizzaData["Time of Day"] = time.asctime(time.localtime())
