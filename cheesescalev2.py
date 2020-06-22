@@ -160,6 +160,8 @@ def readWeight():
                 pass
         except serial.serialutil.SerialException:
             serial_open()
+        except TypeError:
+          pass
     else:
         serial_open()
     time.sleep(.01)
