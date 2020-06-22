@@ -20,10 +20,10 @@ time.tzset()
 
 #pyfire set up
 config = {
-  "apiKey" : "AIzaSyC8vr6WeOD1UvnT7esvW-aHtwFOx9YVSMA",
-  "authDomain" : "cheesescale.firebaseapp.com",
-  "databaseURL" : "https://cheesescale.firebaseio.com/",
-  "storageBucket" : "cheesescale.appspot.com"
+  "apiKey" : "AIzaSyCwL-B0X1dx9canmLWcctpvrzqB64hub8s",
+  "authDomain" : "cheese-scale-7b32f.firebaseapp.com",
+  "databaseURL" : "https://cheese-scale-7b32f.firebaseio.com/",
+  "storageBucket" : "cheese-scale-7b32f.appspot.com"
 }
 
 firebase = pyfireconnect.initialize(config)
