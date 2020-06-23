@@ -1,18 +1,18 @@
-import serial
-import sys
-import threading
-import multiprocessing
-import datetime
-import time
 import os
+import sys
 import json
-import RPi.GPIO as GPIO
-from luma.core.interface.serial import spi, noop
-from luma.core.render import canvas
-from luma.core.legacy import text
-from luma.core.legacy.font import proportional, LCD_FONT
-from luma.led_matrix.device import max7219
+import time
+import serial
+import datetime
+import threading
 import pyfireconnect
+import multiprocessing
+import RPi.GPIO as GPIO
+from luma.core.legacy import text
+from luma.core.render import canvas
+from luma.led_matrix.device import max7219
+from luma.core.interface.serial import spi, noop
+from luma.core.legacy.font import proportional, LCD_FONT
 
 #Set timezone
 os.environ['TZ'] = 'US/Eastern'
@@ -48,6 +48,14 @@ GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(13,GPIO.IN)
 GPIO.setup(15,GPIO.IN)
 GPIO.setup(37,GPIO.IN)
+
+#Set up these pins to output high to buttons
+GPIO.setup(3,GPIO.OUT)
+GPIO.output(3,1)
+GPIO.setup(5,GPIO.OUT)
+GPIO.output(5,1)
+GPIO.setup(7,GPIO.OUT)
+GPIO.output(7,1)
 
 #Dictionary of variables for data collection
 pizzaData = { 
