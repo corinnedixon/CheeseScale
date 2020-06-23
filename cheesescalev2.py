@@ -50,7 +50,7 @@ GPIO.setup(15,GPIO.IN)
 GPIO.setup(37,GPIO.IN)
 
 #Set up these pins to output high to buttons
-GPIO.setwarnings(false)
+GPIO.setwarnings(False)
 GPIO.setup(3,GPIO.OUT)
 GPIO.output(3,1)
 GPIO.setup(5,GPIO.OUT)
