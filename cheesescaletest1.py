@@ -193,6 +193,8 @@ while True:
   tare()
 
   #wait for switch turn on
+  with canvas(device) as draw:
+        draw.rectangle(device.bounding_box, outline="black", fill="black")
   while (GPIO.input(37) == GPIO.LOW):
     pass
 
