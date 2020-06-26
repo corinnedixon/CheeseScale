@@ -204,6 +204,7 @@ while True:
 
   #mainloop run while switch is on
   while (GPIO.input(22) == GPIO.HIGH):
+    print(GPIO.input(22) + " " + GPIO.input(13) + " " + GPIO.input(15))
     #Update weight from scale
     readWeight()
     time.sleep(.01)
