@@ -44,10 +44,10 @@ GPIO.setup(button10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-#Set up 3 position switch at IO pins and on off switch
+#Set up 3 position switch at IO pins and on/off switch
 GPIO.setup(13,GPIO.IN)
 GPIO.setup(15,GPIO.IN)
-GPIO.setup(37,GPIO.IN)
+GPIO.setup(22,GPIO.IN)
 
 #Set up these pins to output high to buttons
 GPIO.setwarnings(False)
@@ -192,11 +192,11 @@ serial_open()
 tare()
 
 #wait for switch turn on
-while (GPIO.input(37) == GPIO.LOW):
+while (GPIO.input(22) == GPIO.LOW):
   pass
 
 #mainloop run while switch is on
-while (GPIO.input(37) == GPIO.HIGH):
+while (GPIO.input(22) == GPIO.HIGH):
   #Update weight from scale
   readWeight()
   time.sleep(.01)
