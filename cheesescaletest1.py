@@ -64,7 +64,7 @@ GPIO.output(18,1)
 
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
-device = max7219(sr, cascaded=4, block_orientation=-90)
+device = max7219(sr, cascaded=4, block_orientation=270)
   
 #Class for pretop pizza, holds cheese and pepperoni weights in pounds
 class PretopPizza:
@@ -148,19 +148,17 @@ def readWeight():
             if ser.in_waiting >= 9:
                 b = ser.read_all()
                 b2 = b.decode("utf-8")
-                if b2[0] == "W":
-                    if b2[b2.find(":") + 1] == "-":
-                        fac = -1
-                    else:
-                        fac = 1
-
-                    b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
-
-                    try:
-                        x = round(float(b3) * fac * 2.20462,3)
-                        scaleWeight.set(x)
-                    except ValueError:
-                        pass
+                if b2[b2.find(":") + 1] == "-":
+                    fac = -1
+                else:
+                    fac = 1
+                b3 = b2[b2.find(":") + 2:b2.find(":") + 9].strip()
+                
+                try:
+                    x = round(float(b3) * fac * 2.20462,2)
+                    scaleWeight.set(x)
+                except ValueError:
+                    pass
             else:
                 pass
         except serial.serialutil.SerialException:
