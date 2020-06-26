@@ -49,7 +49,7 @@ GPIO.setup(13,GPIO.IN)
 GPIO.setup(15,GPIO.IN)
 GPIO.setup(37,GPIO.IN)
 
-#Set up these pins to output high to buttons
+#Set up these pins to output high to buttons and on/off switch
 GPIO.setwarnings(False)
 GPIO.setup(3,GPIO.OUT)
 GPIO.output(3,1)
@@ -57,6 +57,10 @@ GPIO.setup(5,GPIO.OUT)
 GPIO.output(5,1)
 GPIO.setup(7,GPIO.OUT)
 GPIO.output(7,1)
+GPIO.setup(16,GPIO.OUT)
+GPIO.output(16,1)
+GPIO.setup(18,GPIO.OUT)
+GPIO.output(18,1)
 
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
@@ -199,7 +203,7 @@ while True:
     pass
 
   #mainloop run while switch is on
-  while (GPIO.input(37) == GPIO.HIGH):
+  while (GPIO.input(22) == GPIO.HIGH):
     #Update weight from scale
     readWeight()
     time.sleep(.01)
