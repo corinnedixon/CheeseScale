@@ -194,7 +194,7 @@ def checkOnOff():
     #Turn off lights
     with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
-  time.sleep(0.3)
+  time.sleep(5)
   
 
 while True:
