@@ -208,7 +208,7 @@ while True:
   #wait for switch turn on
   with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
-  while (!on):
+  while (not on):
     checkOnOff()
     pass
 
