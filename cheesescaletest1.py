@@ -65,6 +65,7 @@ GPIO.output(18,1)
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
 device = max7219(sr, cascaded=4, block_orientation=-90)
+on = False
   
 #Class for pretop pizza, holds cheese and pepperoni weights in pounds
 class PretopPizza:
@@ -182,6 +183,14 @@ def serial_open():
 #Tares the scale to zero when you press the button
 def tare():
     ser.write(b'TK\n')
+    
+def checkOnOff():
+  if GPIO.input(13) == GPIO.HIGH:
+    on = True
+  else:
+    on = False
+  time.sleep(0.1)
+  
 
 while True:
   #Dictionary of variables for data collection
@@ -203,8 +212,7 @@ while True:
     pass
 
   #mainloop run while switch is on
-  while (GPIO.input(22) == GPIO.HIGH):
-    print(str(GPIO.input(22)) + " " + str(GPIO.input(13)) + " " + str(GPIO.input(15)))
+  while (on):
     #Update weight from scale
     readWeight()
     time.sleep(.01)
@@ -229,6 +237,13 @@ while True:
       buttonPressed(12)
     elif GPIO.input(button14) == GPIO.HIGH:
       buttonPressed(14)
+      
+    #Check on/off switch
+    checkOnOff()
   
   #Save last pizza before exiting
   buttonPressed(0)
+
+#Turn off lights when done
+with canvas(device) as draw:
+    draw.rectangle(device.bounding_box, outline="black", fill="black")
