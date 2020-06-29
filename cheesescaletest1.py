@@ -45,9 +45,9 @@ GPIO.setup(button12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up 3 position switch at IO pins and on/off switch
-GPIO.setup(13,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(15,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(22,GPIO.IN,pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(13,GPIO.IN)
+GPIO.setup(15,GPIO.IN)
+GPIO.setup(22,GPIO.IN)
 
 #Set up these pins to output high to buttons and on/off switch
 GPIO.setwarnings(False)
@@ -57,15 +57,14 @@ GPIO.setup(5,GPIO.OUT)
 GPIO.output(5,1)
 GPIO.setup(7,GPIO.OUT)
 GPIO.output(7,1)
-#GPIO.setup(16,GPIO.OUT)
-#GPIO.output(16,1)
-#GPIO.setup(18,GPIO.OUT)
-#GPIO.output(18,1)
+GPIO.setup(16,GPIO.OUT)
+GPIO.output(16,1)
+GPIO.setup(18,GPIO.OUT)
+GPIO.output(18,1)
 
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
 device = max7219(sr, cascaded=4, block_orientation=-90)
-on = False
   
 #Class for pretop pizza, holds cheese and pepperoni weights in pounds
 class PretopPizza:
@@ -121,7 +120,7 @@ def buttonPressed(pizzaSize):
     db.push(pizzaData)
   
   tare()
-  time.sleep(0.1)
+  time.sleep(.1)
   pizzaData["Weight (lbs)"] = 0
   pizzaData["Size"] = pizzaSize
   pizzaData["Time of Day"] = time.asctime(time.localtime())
@@ -183,19 +182,6 @@ def serial_open():
 #Tares the scale to zero when you press the button
 def tare():
     ser.write(b'TK\n')
-    
-def checkOnOff():
-  if GPIO.input(22) == GPIO.HIGH:
-    on = True
-    print("ON")
-  else:
-    on = False
-    print("OFF")
-    #Turn off lights
-    with canvas(device) as draw:
-        draw.rectangle(device.bounding_box, outline="black", fill="black")
-  time.sleep(0.1)
-  
 
 while True:
   #Dictionary of variables for data collection
@@ -211,14 +197,17 @@ while True:
   tare()
 
   #wait for switch turn on
-  while (not on):
-    checkOnOff()
+  with canvas(device) as draw:
+        draw.rectangle(device.bounding_box, outline="black", fill="black")
+  while (GPIO.input(22) == GPIO.LOW):
+    pass
 
   #mainloop run while switch is on
-  while (on):
+  while (GPIO.input(22) == GPIO.HIGH):
+    print(str(GPIO.input(22)) + " " + str(GPIO.input(13)) + " " + str(GPIO.input(15)))
     #Update weight from scale
     readWeight()
-
+    time.sleep(.01)
     #check for weight to be -513 so that random data is not recorded at start
     if(scaleWeight.get() > pizzaData["Weight (lbs)"] and pizzaData["Weight (lbs)"] != -513):
       pizzaData["Weight (lbs)"] = scaleWeight.get()
@@ -240,11 +229,6 @@ while True:
       buttonPressed(12)
     elif GPIO.input(button14) == GPIO.HIGH:
       buttonPressed(14)
-      
-    #Check on/off switch
-    checkOnOff()
-    
-    time.sleep(.01)
   
   #Save last pizza before exiting
   buttonPressed(0)
