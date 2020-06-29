@@ -187,8 +187,10 @@ def tare():
 def checkOnOff():
   if GPIO.input(13) == GPIO.HIGH:
     on = True
+    print("ON")
   else:
     on = False
+    print("OFF")
     #Turn off lights
     with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
