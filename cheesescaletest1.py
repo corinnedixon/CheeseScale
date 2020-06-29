@@ -208,7 +208,8 @@ while True:
   #wait for switch turn on
   with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
-  while (GPIO.input(22) == GPIO.LOW):
+  while (!on):
+    checkOnOff()
     pass
 
   #mainloop run while switch is on
