@@ -121,7 +121,7 @@ def buttonPressed(pizzaSize):
     db.push(pizzaData)
   
   tare()
-  time.sleep(.1)
+  time.sleep(0.1)
   pizzaData["Weight (lbs)"] = 0
   pizzaData["Size"] = pizzaSize
   pizzaData["Time of Day"] = time.asctime(time.localtime())
@@ -194,7 +194,7 @@ def checkOnOff():
     #Turn off lights
     with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
-  time.sleep(5)
+  time.sleep(0.1)
   
 
 while True:
@@ -213,13 +213,12 @@ while True:
   #wait for switch turn on
   while (not on):
     checkOnOff()
-    pass
 
   #mainloop run while switch is on
   while (on):
     #Update weight from scale
     readWeight()
-    time.sleep(.01)
+
     #check for weight to be -513 so that random data is not recorded at start
     if(scaleWeight.get() > pizzaData["Weight (lbs)"] and pizzaData["Weight (lbs)"] != -513):
       pizzaData["Weight (lbs)"] = scaleWeight.get()
@@ -244,6 +243,8 @@ while True:
       
     #Check on/off switch
     checkOnOff()
+    
+    time.sleep(.01)
   
   #Save last pizza before exiting
   buttonPressed(0)
