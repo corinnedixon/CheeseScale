@@ -189,6 +189,9 @@ def checkOnOff():
     on = True
   else:
     on = False
+    #Turn off lights
+    with canvas(device) as draw:
+        draw.rectangle(device.bounding_box, outline="black", fill="black")
   time.sleep(0.1)
   
 
@@ -206,8 +209,6 @@ while True:
   tare()
 
   #wait for switch turn on
-  with canvas(device) as draw:
-        draw.rectangle(device.bounding_box, outline="black", fill="black")
   while (not on):
     checkOnOff()
     pass
@@ -244,7 +245,3 @@ while True:
   
   #Save last pizza before exiting
   buttonPressed(0)
-
-#Turn off lights when done
-with canvas(device) as draw:
-    draw.rectangle(device.bounding_box, outline="black", fill="black")
