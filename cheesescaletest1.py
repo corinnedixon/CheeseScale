@@ -45,9 +45,9 @@ GPIO.setup(button12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up 3 position switch at IO pins and on/off switch
-GPIO.setup(13,GPIO.IN)
-GPIO.setup(15,GPIO.IN)
-GPIO.setup(22,GPIO.IN)
+GPIO.setup(13,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(15,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up these pins to output high to buttons and on/off switch
 GPIO.setwarnings(False)
@@ -204,7 +204,6 @@ while True:
 
   #mainloop run while switch is on
   while (GPIO.input(22) == GPIO.HIGH):
-    print(str(GPIO.input(22)) + " " + str(GPIO.input(13)) + " " + str(GPIO.input(15)))
     #Update weight from scale
     readWeight()
     time.sleep(.01)
