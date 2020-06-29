@@ -191,8 +191,7 @@ while True:
   
   while (GPIO.input(22) == GPIO.LOW):
     #LEDS off
-    with canvas(device) as draw:
-        draw.rectangle(device.bounding_box, outline="black", fill="black")
+    device.clear()
 
   #mainloop run while switch is on
   while (GPIO.input(22) == GPIO.HIGH):
