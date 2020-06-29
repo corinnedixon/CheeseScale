@@ -185,7 +185,7 @@ def tare():
     ser.write(b'TK\n')
     
 def checkOnOff():
-  if GPIO.input(13) == GPIO.HIGH:
+  if GPIO.input(22) == GPIO.HIGH:
     on = True
     print("ON")
   else:
