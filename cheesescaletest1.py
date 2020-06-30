@@ -47,7 +47,6 @@ GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 #Set up 3 position switch at IO pins and on/off switch
 GPIO.setup(13,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(15,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(22,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up these pins to output high to buttons and on/off switch
 GPIO.setwarnings(False)
@@ -57,10 +56,6 @@ GPIO.setup(5,GPIO.OUT)
 GPIO.output(5,1)
 GPIO.setup(7,GPIO.OUT)
 GPIO.output(7,1)
-GPIO.setup(16,GPIO.OUT)
-GPIO.output(16,1)
-GPIO.setup(18,GPIO.OUT)
-GPIO.output(18,1)
 
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
@@ -176,27 +171,20 @@ def serial_open():
 def tare():
     ser.write(b'TK\n')
 
-while True:
-  #Dictionary of variables for data collection
-  pizzaData = { 
-      "Weight (lbs)" : -513, 
-      "Time of Day" : time.asctime(time.localtime()), 
-      "Size" : 14, 
-      "Total Time (s)" : time.time()
-    } 
+#Dictionary of variables for data collection
+pizzaData = { 
+    "Weight (lbs)" : -513, 
+    "Time of Day" : time.asctime(time.localtime()), 
+    "Size" : 14, 
+    "Total Time (s)" : time.time()
+  } 
     
-  #Tare scale before start
-  serial_open()
-  tare()
-  
-  while (GPIO.input(22) == GPIO.LOW):
-    time.sleep(0.05)
-    #LEDS off
-    with canvas(device) as draw:
-        draw.rectangle(device.bounding_box, outline="black", fill="black")
+#Tare scale before start
+serial_open()
+tare()
 
-  #mainloop run while switch is on
-  while (GPIO.input(22) == GPIO.HIGH):
+#mainloop
+while True:
     #Update weight from scale
     readWeight()
     time.sleep(.01)
@@ -222,5 +210,9 @@ while True:
     elif GPIO.input(button14) == GPIO.HIGH:
       buttonPressed(14)
   
-  #Save last pizza before exiting
-  #buttonPressed(0)
+#LEDS off
+with canvas(device) as draw:
+    draw.rectangle(device.bounding_box, outline="black", fill="black")
+        
+#Save last pizza before exiting
+buttonPressed(0)
