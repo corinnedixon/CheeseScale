@@ -46,7 +46,7 @@ GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up 3 position switch at IO pins and on/off switch
 GPIO.setup(13,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(15,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(35,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up these pins to output high to buttons and on/off switch
 GPIO.setwarnings(False)
@@ -195,7 +195,7 @@ while True:
     #Update display corresponding to mode
     if GPIO.input(13) == GPIO.HIGH:
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].cheeseWeight)
-    elif GPIO.input(15) == GPIO.HIGH:
+    elif GPIO.input(35) == GPIO.HIGH:
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].pepWeight)
     else:
       updateNumbers(scaleWeight.get())
