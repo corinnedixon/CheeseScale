@@ -113,7 +113,7 @@ def buttonPressed(pizzaSize):
     db.push(pizzaData)
   
   tare()
-  time.sleep(.1)
+  time.sleep(.01)
   pizzaData["Weight (lbs)"] = 0
   pizzaData["Size"] = pizzaSize
   pizzaData["Time of Day"] = time.asctime(time.localtime())
@@ -190,6 +190,7 @@ while True:
   tare()
   
   while (GPIO.input(22) == GPIO.LOW):
+    time.sleep(0.05)
     #LEDS off
     with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
