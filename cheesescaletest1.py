@@ -33,10 +33,10 @@ db = firebase.database()
 GPIO.setmode(GPIO.BOARD)
 
 #Input pins for each button
-button7 = 12
+button7 = 11
 button10 = 10
 button12 = 8
-button14 = 11
+button14 = 12
 
 #Set up for these pins as inputs
 GPIO.setup(button7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
