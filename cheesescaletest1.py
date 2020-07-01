@@ -39,6 +39,7 @@ button12 = 12
 button14 = 8
 
 #Set up for these pins as inputs
+GPIO.setwarnings(False)
 GPIO.setup(button7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -49,7 +50,6 @@ GPIO.setup(21,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(31,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up these pins to output high to buttons and on/off switch
-GPIO.setwarnings(False)
 GPIO.setup(3,GPIO.OUT)
 GPIO.output(3,1)
 GPIO.setup(5,GPIO.OUT)
