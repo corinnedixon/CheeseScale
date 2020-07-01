@@ -40,7 +40,7 @@ button14 = 8
 
 #Input pins for switches
 onOff = 22
-cheeseToggle = 26
+cheeseToggle = 21
 pepToggle = 31
 
 #Set up for these pins as inputs
