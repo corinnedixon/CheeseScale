@@ -30,6 +30,7 @@ firebase = pyfireconnect.initialize(config)
 db = firebase.database()
 
 #Board set up
+GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 
 #Input pins for each button
