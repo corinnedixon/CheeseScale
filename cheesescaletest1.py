@@ -38,6 +38,11 @@ button10 = 10
 button12 = 12
 button14 = 8
 
+#Input pins for switches
+onOff = 22
+cheeseToggle = 28
+pepToggle = 31
+
 #Set up for these pins as inputs
 GPIO.setup(button7, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -45,8 +50,9 @@ GPIO.setup(button12, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(button14, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up 3 position switch at IO pins and on/off switch
-GPIO.setup(31,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(35,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(cheeseToggle,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(pepToggle,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(onOff,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Set up these pins to output high to buttons and on/off switch
 GPIO.setwarnings(False)
@@ -56,6 +62,10 @@ GPIO.setup(5,GPIO.OUT)
 GPIO.output(5,1)
 GPIO.setup(7,GPIO.OUT)
 GPIO.output(7,1)
+GPIO.setup(16,GPIO.OUT)
+GPIO.output(16,1)
+GPIO.setup(18,GPIO.OUT)
+GPIO.output(18,1)
 
 #LED matrix setup
 sr = spi(port=0, device=0, gpio=noop())
@@ -171,20 +181,27 @@ def serial_open():
 def tare():
     ser.write(b'TK\n')
 
-#Dictionary of variables for data collection
-pizzaData = { 
-    "Weight (lbs)" : -513, 
-    "Time of Day" : time.asctime(time.localtime()), 
-    "Size" : 14, 
-    "Total Time (s)" : time.time()
-  } 
-    
-#Tare scale before start
-serial_open()
-tare()
-
-#mainloop
 while True:
+  #Dictionary of variables for data collection
+  pizzaData = { 
+      "Weight (lbs)" : -513, 
+      "Time of Day" : time.asctime(time.localtime()), 
+      "Size" : 14, 
+      "Total Time (s)" : time.time()
+    } 
+    
+  #Tare scale before start
+  serial_open()
+  tare()
+  
+  while (GPIO.input(onOff) == GPIO.LOW):
+    time.sleep(0.05)
+    #LEDS off
+    with canvas(device) as draw:
+        draw.rectangle(device.bounding_box, outline="black", fill="black")
+
+  #mainloop run while switch is on
+  while (GPIO.input(onOff) == GPIO.HIGH):
     #Update weight from scale
     readWeight()
     time.sleep(.01)
@@ -193,9 +210,9 @@ while True:
       pizzaData["Weight (lbs)"] = scaleWeight.get()
   
     #Update display corresponding to mode
-    if GPIO.input(31) == GPIO.HIGH:
+    if GPIO.input(cheeseToggle) == GPIO.HIGH:
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].cheeseWeight)
-    elif GPIO.input(35) == GPIO.HIGH:
+    elif GPIO.input(pepToggle) == GPIO.HIGH:
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].pepWeight)
     else:
       updateNumbers(scaleWeight.get())
@@ -210,9 +227,5 @@ while True:
     elif GPIO.input(button14) == GPIO.HIGH:
       buttonPressed(14)
   
-#LEDS off
-with canvas(device) as draw:
-    draw.rectangle(device.bounding_box, outline="black", fill="black")
-        
-#Save last pizza before exiting
-buttonPressed(0)
+  #Save last pizza before exiting
+  #buttonPressed(0)
