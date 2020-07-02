@@ -34,9 +34,9 @@ GPIO.setmode(GPIO.BOARD)
 
 #Input pins for each button
 button7 = 11
-button10 = 10
+button10 = 8
 button12 = 12
-button14 = 8
+button14 = 10
 
 #Input pins for switches
 onOff = 36
