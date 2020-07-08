@@ -215,17 +215,17 @@ while True:
       "Size" : 14, 
       "Total Time (s)" : time.time(),
       "Mode" : "Normal"
-    } 
-    
-  #Tare scale before start
-  serial_open()
-  tare()
+    }
   
   while (GPIO.input(onOff) == GPIO.LOW):
     time.sleep(0.05)
     #LEDS off
     with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
+
+  #Tare scale before start
+  serial_open()
+  tare()
 
   #mainloop run while switch is on
   while (GPIO.input(onOff) == GPIO.HIGH):
