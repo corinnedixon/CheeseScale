@@ -204,7 +204,8 @@ while True:
       "Weight (lbs)" : -513, 
       "Time of Day" : time.asctime(time.localtime()), 
       "Size" : 14, 
-      "Total Time (s)" : time.time()
+      "Total Time (s)" : time.time(),
+      "Mode" : "Normal"
     } 
     
   #Tare scale before start
@@ -228,10 +229,13 @@ while True:
   
     #Update display corresponding to mode
     if GPIO.input(cheeseToggle) == GPIO.HIGH:
+      pizzaData["Mode"] = "Cheese"
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].cheeseWeight)
     elif GPIO.input(pepToggle) == GPIO.HIGH:
+      pizzaData["Mode"] = "Pepperoni"
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].pepWeight)
     else:
+      pizzaData["Mode"] = "Normal"
       updateNumbers(scaleWeight.get())
     
     #Button check for size
