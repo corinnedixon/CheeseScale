@@ -141,6 +141,15 @@ def buttonPressed(pizzaSize):
   pizzaData["Time of Day"] = time.asctime(time.localtime())
   pizzaData["Total Time (s)"] = time.time()
 
+#Function that returns current mode
+def currentMode():
+  mode = "Normal"
+  if GPIO.input(cheeseToggle) == GPIO.HIGH:
+      mode = "Cheese"
+  elif GPIO.input(pepToggle) == GPIO.HIGH:
+      mode = "Pepperoni"
+  return mode
+
 #Mutable double class for keeping track of weight
 class MutableDouble(float):
     def __init__(self, val = 0):
@@ -226,16 +235,14 @@ while True:
     #check for weight to be -513 so that random data is not recorded at start
     if(scaleWeight.get() > pizzaData["Weight (lbs)"] and pizzaData["Weight (lbs)"] != -513):
       pizzaData["Weight (lbs)"] = scaleWeight.get()
-  
+      pizzaData["Mode"] = currentMode()
+      
     #Update display corresponding to mode
     if GPIO.input(cheeseToggle) == GPIO.HIGH:
-      pizzaData["Mode"] = "Cheese"
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].cheeseWeight)
     elif GPIO.input(pepToggle) == GPIO.HIGH:
-      pizzaData["Mode"] = "Pepperoni"
       updateLightBar(scaleWeight.get(), Pizzas[str(pizzaData["Size"])].pepWeight)
     else:
-      pizzaData["Mode"] = "Normal"
       updateNumbers(scaleWeight.get())
     
     #Button check for size
