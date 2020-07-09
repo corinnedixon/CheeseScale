@@ -249,16 +249,14 @@ while True:
       updateNumbers(scaleWeight.get())
     
     #Button check for size
-    if hasInternet and GPIO.input(button7) == GPIO.HIGH:
+    if GPIO.input(button7) == GPIO.HIGH:
       buttonPressed(7)
-    elif hasInternet and GPIO.input(button10) == GPIO.HIGH:
+    elif GPIO.input(button10) == GPIO.HIGH:
       buttonPressed(10)
-    elif hasInternet and GPIO.input(button12) == GPIO.HIGH:
+    elif GPIO.input(button12) == GPIO.HIGH:
       buttonPressed(12)
-    elif hasInternet and GPIO.input(button14) == GPIO.HIGH:
+    elif GPIO.input(button14) == GPIO.HIGH:
       buttonPressed(14)
-    else:
-      tare()
   
   #Save last pizza before exiting
   buttonPressed(0)
