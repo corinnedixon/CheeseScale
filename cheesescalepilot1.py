@@ -24,7 +24,7 @@ def checkInternet():
   try:
     urllib.request.urlopen('http://google.com')
   except:
-    hasInternet = False
+    internet = False
   return internet
 
 hasInternet = checkInternet()
@@ -96,7 +96,7 @@ class PretopPizza:
 #Pizza dictionary for pretop weights
 Pizzas = {
         "7":PretopPizza(0.1,0.06),
-        "10":PretopPizza(0.22,0.15),
+        "10":PretopPizza(0.16,0.15),
         "12":PretopPizza(0.32,0.22),
         "14":PretopPizza(0.44,0.3)
         }
@@ -131,7 +131,7 @@ def updateNumbers(lbs):
 def buttonPressed(pizzaSize):
   if pizzaData["Weight (lbs)"] > 0:
     pizzaData["Total Time (s)"] = round(time.time() - pizzaData["Total Time (s)"], 3)
-    if(hasInternet and checkInternet()):
+    if(hasInternet):
       db.push(pizzaData)
   
   tare()
@@ -140,7 +140,7 @@ def buttonPressed(pizzaSize):
   pizzaData["Size"] = pizzaSize
   pizzaData["Time of Day"] = time.asctime(time.localtime())
   pizzaData["Total Time (s)"] = time.time()
-
+  
 #Function that returns current mode
 def currentMode():
   mode = "Normal"
@@ -226,6 +226,9 @@ while True:
   #Tare scale before start
   serial_open()
   tare()
+  
+  #Check for internet again
+  hasInternet = hasInternet and checkInternet()
 
   #mainloop run while switch is on
   while (GPIO.input(onOff) == GPIO.HIGH):
@@ -246,14 +249,16 @@ while True:
       updateNumbers(scaleWeight.get())
     
     #Button check for size
-    if GPIO.input(button7) == GPIO.HIGH:
+    if hasInternet and GPIO.input(button7) == GPIO.HIGH:
       buttonPressed(7)
-    elif GPIO.input(button10) == GPIO.HIGH:
+    elif hasInternet and GPIO.input(button10) == GPIO.HIGH:
       buttonPressed(10)
-    elif GPIO.input(button12) == GPIO.HIGH:
+    elif hasInternet and GPIO.input(button12) == GPIO.HIGH:
       buttonPressed(12)
-    elif GPIO.input(button14) == GPIO.HIGH:
+    elif hasInternet and GPIO.input(button14) == GPIO.HIGH:
       buttonPressed(14)
+    else:
+      tare()
   
   #Save last pizza before exiting
   buttonPressed(0)
