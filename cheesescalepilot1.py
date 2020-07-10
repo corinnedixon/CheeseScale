@@ -227,9 +227,6 @@ while True:
   #Tare scale before start
   serial_open()
   tare()
-  
-  #Check for internet again
-  hasInternet = hasInternet and checkInternet()
 
   #mainloop run while switch is on
   while (GPIO.input(onOff) == GPIO.HIGH):
