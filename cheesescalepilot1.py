@@ -133,6 +133,7 @@ def updateNumbers(lbs):
 def buttonPressed(pizzaSize):
   if pizzaData["Weight (lbs)"] > 0:
     pizzaData["Total Time (s)"] = round(time.time() - pizzaData["Total Time (s)"], 3)
+    hasInternet = hasInternet and checkInternet()
     if(hasInternet):
       db.push(pizzaData)
   
