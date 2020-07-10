@@ -22,7 +22,7 @@ from luma.core.legacy.font import proportional, LCD_FONT
 def checkInternet():
   internet = True
   try:
-    urllib.request.urlopen('https://google.com')
+    urllib.request.urlopen('https://www.google.com')
   except:
     internet = False
   return internet
@@ -230,6 +230,7 @@ while True:
 
   #mainloop run while switch is on
   while (GPIO.input(onOff) == GPIO.HIGH):
+    hasInternet = checkInternet()
     #Update weight from scale
     readWeight()
     time.sleep(.01)
