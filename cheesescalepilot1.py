@@ -22,7 +22,7 @@ from luma.core.legacy.font import proportional, LCD_FONT
 def checkInternet():
   internet = True
   try:
-    urllib.request.urlopen('https://www.google.com')
+    urllib.request.urlopen('https://cheese-scale-7b32f.firebaseio.com/')
   except:
     internet = False
   return internet
