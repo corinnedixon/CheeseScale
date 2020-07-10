@@ -116,7 +116,7 @@ def updateLightBar(currentWeight, toppingWeight):
         draw.rectangle(device.bounding_box, outline="black", fill="black")
     else:
       with canvas(device) as draw:
-        draw.rectangle(device.bounding_box, outline="white", fill="white")
+        draw.rectangle(device.bounding_box, outline="red", fill="red")
       time.sleep(0.15)
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
