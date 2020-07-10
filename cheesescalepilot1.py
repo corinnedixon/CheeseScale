@@ -230,7 +230,6 @@ while True:
 
   #mainloop run while switch is on
   while (GPIO.input(onOff) == GPIO.HIGH):
-    hasInternet = checkInternet()
     #Update weight from scale
     readWeight()
     time.sleep(.01)
