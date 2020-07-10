@@ -120,6 +120,7 @@ def updateLightBar(currentWeight, toppingWeight):
       time.sleep(0.1)
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
+      time.sleep(0.1)
 
 #Function for numeric display
 def updateNumbers(lbs):
