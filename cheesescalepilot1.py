@@ -116,7 +116,7 @@ def updateLightBar(currentWeight, toppingWeight):
         draw.rectangle(device.bounding_box, outline="black", fill="black")
     else:
       with canvas(device) as draw:
-        draw.rectangle(device.bounding_box, outline="red", fill="red")
+        draw.rectangle(device.bounding_box, outline="white", fill="white")
       time.sleep(0.15)
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
@@ -230,6 +230,7 @@ while True:
   
   #Check for internet again
   hasInternet = hasInternet and checkInternet()
+  print(hasInternet)
 
   #mainloop run while switch is on
   while (GPIO.input(onOff) == GPIO.HIGH):
