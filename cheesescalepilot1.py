@@ -27,7 +27,7 @@ def checkInternet():
     internet = False
   return internet
 
-time.sleep(15)
+time.sleep(5)
 hasInternet = checkInternet()
 
 #Set timezone
