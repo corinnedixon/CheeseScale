@@ -118,7 +118,7 @@ def updateLightBar(currentWeight, toppingWeight):
     else:
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="white", fill="white")
-      time.sleep(0.25)
+      time.sleep(0.2)
       with canvas(device) as draw:
         draw.rectangle(device.bounding_box, outline="black", fill="black")
       time.sleep(0.05)
@@ -133,7 +133,6 @@ def updateNumbers(lbs):
 def buttonPressed(pizzaSize):
   if pizzaData["Weight (lbs)"] > 0:
     pizzaData["Total Time (s)"] = round(time.time() - pizzaData["Total Time (s)"], 3)
-    hasInternet = hasInternet and checkInternet()
     if(hasInternet):
       db.push(pizzaData)
   
