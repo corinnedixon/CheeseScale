@@ -19,8 +19,8 @@ Setup & Installation
   $ sudo pip3 install pyfireconnect
 4. Clone this repository onto the Pi
   $  git clone https://github.com/corinnedixon/CheeseScale
-5. To allow the code to run on boot, type sudo nano /etc/rc.local || python3 and paste this into the file before exit 0: 
-  /home/pi/CheeseScale/cheesescaletest1.py &
+5. To allow the code to run on boot, type sudo nano /etc/rc.local and paste this into the file before exit 0: 
+  python 3/home/pi/CheeseScale/cheesescaletest1.py &
 
 Usage & Details
 Code runs with proper scale load cell, 3 position switch, two position switch, and 4 buttons.
