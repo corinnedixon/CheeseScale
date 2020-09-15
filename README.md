@@ -1,12 +1,12 @@
 # CheeseScale
 
-Overview
+Overview:
 EDGE Cheese Scale code and tests
 
-Features
+Features:
 Basic scale mode, pretop cheese mode for Donatos 14 inch, and pretop pepperoni mode for Donatos 14 inch
 
-Setup & Installation
+Setup & Installation:
 1. Install Raspbian to Raspberry Pi (any version)
 2. Run the following commands to install the Luma LED Matrix library
   $ sudo raspi-config and enable P4 SPI
@@ -22,9 +22,9 @@ Setup & Installation
 5. To allow the code to run on boot, type sudo nano /etc/rc.local and paste this into the file before exit 0: 
   python 3/home/pi/CheeseScale/cheesescaletest1.py &
 
-Usage & Details
+Usage & Details:
 Code runs with proper scale load cell, 3 position switch, two position switch, and 4 buttons.
 These ports can be changed in the file being run (cheesescaletest1.py)
 
-Credits
+Credits:
 Code for reading and writing to scale written by David Vincent
